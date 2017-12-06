@@ -1,0 +1,12 @@
+{
+  "name": "mw3",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/Minds/mw3",
+  "author": "edgebal",
+  "license": "MIT",
+  "dependencies": {
+    "ethjs-signer": "~0.1.1",
+    "yargs": "~10.0.3"
+  }
+}
