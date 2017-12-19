@@ -6,6 +6,7 @@
   "author": "edgebal",
   "license": "MIT",
   "dependencies": {
+    "ethjs": "^0.3.1",
     "ethjs-signer": "~0.1.1",
     "yargs": "~10.0.3"
   }

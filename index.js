@@ -1,3 +1,4 @@
+const Eth = require('ethjs');
 const argv = require('yargs')
     .argv;
 
@@ -16,6 +17,13 @@ switch (argv._[0] || '') {
 
         process.stdout.write(signedTx);
         break;
+  case 'sha3':
+    if (!argv.str) {
+      console.error('Missing required parameters');
+      return process.exit(1);
+    }
+    process.stdout.write(Eth.keccak256(argv.str));
+    break;
     default:
         process.exit(1);
 
