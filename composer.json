@@ -3,8 +3,13 @@
     "description": "Minds PHP Web3",
     "autoload": {
         "psr-4": { "MW3\\": "src/" }
-     },
-     "require-dev": {
+    },
+    "require-dev": {
         "phpspec/phpspec": "~2.0"
-     }
+    },
+    "scripts": {
+        "post-package-install": [
+            "npm install"
+        ]
+    }
 }

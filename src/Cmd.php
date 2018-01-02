@@ -11,7 +11,7 @@ class Cmd
 
     public function __construct()
     {
-        $this->bin = dirname(dirname(__FILE__)) . 'index.js';
+        $this->bin = dirname(dirname(__FILE__)) . '/index.js';
     }
 
     /**
@@ -21,7 +21,7 @@ class Cmd
      */
     public function exec($cmd)
     {
-        $cmd = "{$this->bin} $cmd";
+        $cmd = "node {$this->bin} $cmd";
         return trim((string) shell_exec($cmd));
     }
 
