@@ -1,4 +1,10 @@
 {
     "name": "minds/mw3",
-    "description": "Minds PHP Web3"
+    "description": "Minds PHP Web3",
+    "autoload": {
+        "psr-4": { "MW3\\": "src/" }
+     },
+     "require-dev": {
+        "phpspec/phpspec": "~2.0"
+     }
 }
