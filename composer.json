@@ -1,15 +1,17 @@
 {
     "name": "minds/mw3",
     "description": "Minds PHP Web3",
+    "type": "composer-plugin",
     "autoload": {
         "psr-4": { "MW3\\": "src/" }
+    },
+    "require": {
+        "composer-plugin-api": "^1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0"
     },
-    "scripts": {
-        "post-package-install": [
-            "npm install"
-        ]
+    "extra": {
+        "class": "MW3\\Plugin"
     }
 }
