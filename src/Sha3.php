@@ -33,7 +33,7 @@ class Sha3
     public function hash()
     {
         $cmd = "sha3 --str='$this->string'";
-        return $this->cmd->exec($cmd);
+        return substr($this->cmd->exec($cmd), 2);
     }
 
 }
