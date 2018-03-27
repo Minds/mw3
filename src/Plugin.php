@@ -9,6 +9,7 @@ class Plugin implements PluginInterface
 {
     public function activate(Composer $composer, IOInterface $io)
     {
-        exec("npm install");
+        $dir = dirname(dirname(__FILE__));
+        exec("npm --prefix $dir install");
     }
 }
