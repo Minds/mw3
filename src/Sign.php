@@ -6,7 +6,6 @@ namespace MW3;
 
 class Sign
 {
-
     private $cmd;
     private $tx;
     private $privateKey;
@@ -51,4 +50,15 @@ class Sign
         return $this->cmd->exec($cmd);
     }
 
+    /**
+     * Will return the ETH address that signed the message
+     * @param string $message
+     * @param string $signature
+     * @return string
+     */
+    public function recoverAddress(string $message, string $signature): string
+    {
+        $cmd = "recoverAddress --message=\"$message\" --signature=\"$signature\"";
+        return $this->cmd->exec($cmd);
+    }
 }

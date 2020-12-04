@@ -1,6 +1,7 @@
 const Eth = require('ethjs');
 const argv = require('yargs').argv;
 
+const ethers = require('ethers');
 const sign = require('ethjs-signer').sign;
 
 switch (argv._[0] || '') {
@@ -15,6 +16,16 @@ switch (argv._[0] || '') {
       signedTx = sign(tx, argv.privateKey);
 
     process.stdout.write(signedTx);
+    break;
+  case 'recoverAddress':
+    if (!argv.message || !argv.signature) {
+      console.error('Missing required parameters');
+      return process.exit(1);
+    }
+    const msgHash = ethers.utils.hashMessage(argv.message);
+    const msgHashBytes = ethers.utils.arrayify(msgHash);
+    const recoveredAddress = ethers.utils.recoverAddress(msgHashBytes, argv.signature);
+    process.stdout.write(recoveredAddress);
     break;
   case 'sha3':
     if (!argv.str) {
