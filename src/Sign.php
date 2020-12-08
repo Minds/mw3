@@ -61,4 +61,16 @@ class Sign
         $cmd = "recoverAddress --message=\"$message\" --signature=\"$signature\"";
         return $this->cmd->exec($cmd);
     }
+
+    /**
+     * Will return the ETH address that signed the message and confirm it is valid
+     * @param string $message
+     * @param string $signature
+     * @return string
+     */
+    public function verifyMessage(string $message, string $signature): string
+    {
+        $cmd = "verifyMessage --message=\"$message\" --signature=\"$signature\"";
+        return $this->cmd->exec($cmd);
+    }
 }

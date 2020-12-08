@@ -27,6 +27,14 @@ switch (argv._[0] || '') {
     const recoveredAddress = ethers.utils.recoverAddress(msgHashBytes, argv.signature);
     process.stdout.write(recoveredAddress);
     break;
+  case 'verifyMessage':
+    if (!argv.message || !argv.signature) {
+      console.error('Missing required parameters');
+      return process.exit(1);
+    }
+    const verifiedAddress = ethers.utils.verifyMessage(argv.message, argv.signature);
+    process.stdout.write(verifiedAddress);
+    break;
   case 'sha3':
     if (!argv.str) {
       console.error('Missing required parameters');

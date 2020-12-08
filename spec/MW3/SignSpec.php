@@ -33,4 +33,13 @@ class SignSpec extends ObjectBehavior
 
         $this->recoverAddress("123", "sig")->shouldReturn('0xaddress');
     }
+
+    public function it_should_verify_message(Cmd $cmd)
+    {
+        $this->beConstructedWith($cmd);
+
+        $cmd->exec("verifyMessage --message=\"123\" --signature=\"sig\"")->willReturn('0xaddress');
+
+        $this->verifyMessage("123", "sig")->shouldReturn('0xaddress');
+    }
 }
