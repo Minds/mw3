@@ -70,6 +70,7 @@ class Sign
      */
     public function verifyMessage(string $message, string $signature): string
     {
+        $message = addslashes($message);
         $cmd = "verifyMessage --message=\"$message\" --signature=\"$signature\"";
         return $this->cmd->exec($cmd);
     }
