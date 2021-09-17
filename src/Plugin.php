@@ -12,4 +12,14 @@ class Plugin implements PluginInterface
         $dir = dirname(dirname(__FILE__));
         exec("npm --prefix $dir install");
     }
+
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+        // do nothing
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+        // do nothing
+    }
 }
