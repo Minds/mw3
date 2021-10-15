@@ -9,6 +9,7 @@ class Sign
     private $cmd;
     private $tx;
     private $privateKey;
+    private $rpcEndpoint;
 
     public function __construct($cmd = null)
     {
@@ -41,12 +42,23 @@ class Sign
     }
 
     /**
+     * Set the private key
+     * @param string $key - the private key
+     * @return $this
+     */
+    public function setRpcEndpoint($key)
+    {
+        $this->rpcEndpoint = $key;
+        return $this;
+    }
+
+    /**
      * Sign the transaction
      * @return string
      */
     public function sign()
     {
-        $cmd = "sign --privateKey='{$this->privateKey}' --tx='{$this->tx}'";
+        $cmd = "sign --privateKey='{$this->privateKey}' --tx='{$this->tx}' --rpcEndpoint='{$this->rpcEndpoint}'";
         return $this->cmd->exec($cmd);
     }
 

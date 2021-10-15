@@ -6,9 +6,10 @@
   "author": "edgebal",
   "license": "MIT",
   "dependencies": {
-    "ethers": "^5.0.18",
-    "ethjs": "0.3.1",
-    "ethjs-signer": "~0.1.1",
+    "ethers": "^5.4.7",
+    "ethjs": "^0.4.0",
+    "ethjs-signer": "^0.1.1",
+    "web3": "^1.6.0",
     "yargs": "~10.0.3"
   }
 }
