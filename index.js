@@ -1,21 +1,27 @@
 const Eth = require('ethjs');
 const argv = require('yargs').argv;
-
 const ethers = require('ethers');
-const sign = require('ethjs-signer').sign;
+var Web3 = require('web3');
 
 switch (argv._[0] || '') {
   case 'sign':
-    if (!argv.privateKey || !argv.tx) {
-      console.error('Missing required parameters');
+    if (!argv.privateKey || !argv.tx || !argv.rpcEndpoint) {
+      process.stdout.write('ERROR: Missing required parameters');
       return process.exit(1);
     }
 
-    // Sign the transaction
-    const tx = JSON.parse(argv.tx),
-      signedTx = sign(tx, argv.privateKey);
+    var web3 = new Web3(argv.rpcEndpoint);
 
-    process.stdout.write(signedTx);
+    web3.eth.accounts.signTransaction(
+      JSON.parse(argv.tx),
+      argv.privateKey,
+      ((error, result) => {
+        if (error) {
+          process.stdout.write('ERROR: ' + error.message || 'ERROR: An unknown error has occurred signing this transaction')
+        }
+        process.stdout.write(result.rawTransaction)
+      }));
+    
     break;
   case 'recoverAddress':
     if (!argv.message || !argv.signature) {
