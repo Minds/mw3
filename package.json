@@ -8,7 +8,6 @@
   "dependencies": {
     "ethers": "^5.4.7",
     "ethjs": "^0.4.0",
-    "ethjs-signer": "^0.1.1",
     "web3": "^1.6.0",
     "yargs": "~10.0.3"
   }
