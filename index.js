@@ -1,30 +1,42 @@
-const Eth = require('ethjs');
-const argv = require('yargs').argv;
-
 const ethers = require('ethers');
-const sign = require('ethjs-signer').sign;
+
+const yargs = require('yargs');
+const argv = yargs
+  .option('privateKey', {
+      string: true
+  })
+  .option('signature', {
+    string: true
+  })
+  .argv;
 
 switch (argv._[0] || '') {
   case 'sign':
+
     if (!argv.privateKey || !argv.tx) {
       console.error('Missing required parameters');
       return process.exit(1);
     }
 
-    // Sign the transaction
-    const tx = JSON.parse(argv.tx),
-      signedTx = sign(tx, argv.privateKey);
+    // Wallet
+    const wallet = new ethers.Wallet(argv.privateKey);
 
-    process.stdout.write(signedTx);
+    // Deserialize the input
+    const tx = JSON.parse(argv.tx);
+
+    // Sign the transaction
+    const signedTx = wallet.signTransaction(tx)
+      .then(signedTx => process.stdout.write(signedTx))
+      .catch(err => console.error(err));
     break;
   case 'recoverAddress':
     if (!argv.message || !argv.signature) {
       console.error('Missing required parameters');
       return process.exit(1);
     }
-    const msgHash = ethers.utils.hashMessage(argv.message);
-    const msgHashBytes = ethers.utils.arrayify(msgHash);
-    const recoveredAddress = ethers.utils.recoverAddress(msgHashBytes, argv.signature);
+    const msgHash = ethers.hashMessage(argv.message);
+    const msgHashBytes = ethers.getBytes(msgHash);
+    const recoveredAddress = ethers.recoverAddress(msgHashBytes, argv.signature);
     process.stdout.write(recoveredAddress);
     break;
   case 'verifyMessage':
@@ -32,7 +44,8 @@ switch (argv._[0] || '') {
       console.error('Missing required parameters');
       return process.exit(1);
     }
-    const verifiedAddress = ethers.utils.verifyMessage(argv.message, argv.signature);
+
+    const verifiedAddress = ethers.verifyMessage(argv.message, argv.signature);
     process.stdout.write(verifiedAddress);
     break;
   case 'sha3':
@@ -40,7 +53,7 @@ switch (argv._[0] || '') {
       console.error('Missing required parameters');
       return process.exit(1);
     }
-    process.stdout.write(Eth.keccak256(argv.str));
+    process.stdout.write(ethers.keccak256(ethers.toUtf8Bytes(argv.str)));
     break;
     default:
       process.exit(1);
